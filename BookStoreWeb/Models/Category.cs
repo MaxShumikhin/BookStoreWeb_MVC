@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookStoreWeb.Models
 {
@@ -7,7 +8,9 @@ namespace BookStoreWeb.Models
         [Key]
         public int Id { get; set; }
         [Required]
+        [DisplayName("Category name")]
         public string Name { get; set; }
+        [DisplayName("Display order")]
         public int DisplayOrder { get; set; }
     }
 }

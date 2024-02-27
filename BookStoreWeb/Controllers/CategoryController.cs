@@ -1,4 +1,5 @@
 ﻿using BookStoreWeb.Data;
+using BookStoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreWeb.Controllers
@@ -14,6 +15,17 @@ namespace BookStoreWeb.Controllers
         {
             var categoryList = _appDbContext.Categories.ToList();
             return View(categoryList);
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Category category)
+        {
+            _appDbContext.Categories.Add(category);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
