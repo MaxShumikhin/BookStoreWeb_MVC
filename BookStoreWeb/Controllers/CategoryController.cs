@@ -74,9 +74,33 @@ namespace BookStoreWeb.Controllers
 
 
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
-            return View();
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePost(int? id)
+        {
+            var category = _appDbContext.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _appDbContext.Remove(category);
+            _appDbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
