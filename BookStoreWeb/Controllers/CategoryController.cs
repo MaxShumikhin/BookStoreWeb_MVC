@@ -23,9 +23,18 @@ namespace BookStoreWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category category)
         {
-            _appDbContext.Categories.Add(category);
-            _appDbContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (category.Name == category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The display order can't exactly match the name");
+            }
+
+            if (ModelState.IsValid)
+            {
+                _appDbContext.Categories.Add(category);
+                _appDbContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
