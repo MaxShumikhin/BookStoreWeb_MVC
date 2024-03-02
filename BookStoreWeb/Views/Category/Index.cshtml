@@ -1,33 +1,37 @@
 ﻿@model List<Category>;
 
-
-
-<div class="container">
-    <div class="row pt-4 pb-3">
-        <div class="col-6">
-            <h2 class="text-primary">
-                Category list
-            </h2>
-        </div>
-        <div class="col-6 text-end">
-                <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
-                <i class="bi bi-plus-square"></i> Create new category
-                </a>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">
+                    Category list
+                </h2>
+            </div>
         </div>
     </div>
-    <table class="table table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>
-                Category name
-            </th>
-            <th>
-                Display order
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6"></div>
+            <div class="col-6 text-end">
+                <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Create new category
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>
+                    Category name
+                </th>
+                <th>
+                    Display order
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach(var obj in Model.OrderBy(_ => _.DisplayOrder))
             {
                 <tr>
@@ -49,6 +53,7 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>    
+            </tbody>
+        </table>   
+    </div>
 </div>
