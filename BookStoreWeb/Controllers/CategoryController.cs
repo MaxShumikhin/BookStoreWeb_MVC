@@ -32,6 +32,7 @@ namespace BookStoreWeb.Controllers
             {
                 _appDbContext.Categories.Add(category);
                 _appDbContext.SaveChanges();
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
             return View();
@@ -63,17 +64,11 @@ namespace BookStoreWeb.Controllers
             {
                 _appDbContext.Categories.Update(category);
                 _appDbContext.SaveChanges();
+                TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index");
             }
             return View();
         }
-
-
-
-
-
-
-
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -100,6 +95,7 @@ namespace BookStoreWeb.Controllers
 
             _appDbContext.Remove(category);
             _appDbContext.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index");
         }
     }
