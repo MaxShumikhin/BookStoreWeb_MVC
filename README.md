@@ -5,3 +5,4 @@ Bootstrap;
 use N-tier architecture;
 use areas in project (Admin/Customer);
 use TinyMCE for description section;
+use datatables net for view list products
