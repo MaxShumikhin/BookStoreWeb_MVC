@@ -1,6 +1,7 @@
 ﻿using BookStore.DataAccess.Repository.IRepository;
 using BookStore.Models;
 using BookStoreWeb.DataAccess.Data;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreWeb.Areas.Admin.Controllers
@@ -71,33 +72,29 @@ namespace BookStoreWeb.Areas.Admin.Controllers
             }
             return View();
         }
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var category = _unitOfWork.Category.GetAll().ToList();
+            return Json(new { data = category });
+        }
+
+
         public IActionResult Delete(int? id)
         {
-            if (id == null || id == 0)
+            var categoryToBeDeleted = _unitOfWork.Category.Get(c => c.Id == id);
+            if (categoryToBeDeleted == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
-            var category = _unitOfWork.Category.Get(c => c.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
-        }
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeletePost(int? id)
-        {
-            var category = _unitOfWork.Category.Get(c => c.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            _unitOfWork.Category.Remove(category);
+            _unitOfWork.Category.Remove(categoryToBeDeleted);
             _unitOfWork.Save();
-            TempData["success"] = "Category deleted successfully";
-            return RedirectToAction("Index");
+
+            return Json(new { success = true, message = "Delete successful" });
         }
+        #endregion
     }
 }
