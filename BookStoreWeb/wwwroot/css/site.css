@@ -537,3 +537,8 @@ bg-success {
         background-color: #578553;
         border-color: #578553;
     }
+
+.product-image {
+    height: 380px; 
+    object-fit: cover; 
+}
