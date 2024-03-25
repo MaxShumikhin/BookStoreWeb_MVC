@@ -1,9 +1,10 @@
-.Net 8;
-EF Core 8;
-Microsoft SQL Server;
-Bootstrap;
-use N-tier architecture;
+using ASP.Net 8;
+using EF Core 8;
+using ASP.NET Core Identity;
+using Microsoft SQL Server;
+using Bootstrap;
+using N-tier architecture;
 using areas in project (Admin/Customer);
 using TinyMCE for description section;
-using datatables net for view diferent lists;
-using SweetAlert for notification;
+using Datatables net for view diferent lists;
+using SweetAlert and Toastr for notification;
